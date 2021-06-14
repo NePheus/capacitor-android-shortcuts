@@ -1,6 +1,6 @@
 [![npm version](https://badge.fury.io/js/capacitor-android-shortcuts.svg)](https://badge.fury.io/js/capacitor-android-shortcuts)
 
-# capacitor-android-shorcuts
+# capacitor-android-shortcuts
 
 This plugin provides the feature to add a dynamic and pinned shortcut in Android apps. See more [in the Android docs](https://developer.android.com/guide/topics/ui/shortcuts).
 
@@ -15,14 +15,14 @@ This plugin provides the feature to add a dynamic and pinned shortcut in Android
 ## Install
 
 ```bash
-npm install capacitor-android-shorcuts
+npm install capacitor-android-shortcuts
 npx cap sync android
 ```
 
 ## Usage
 
 ```javascript
-import { AndroidShortcuts } from 'capacitor-android-shorcuts';
+import { AndroidShortcuts } from 'capacitor-android-shortcuts';
 
 ...
 

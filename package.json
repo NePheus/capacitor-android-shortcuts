@@ -1,5 +1,5 @@
 {
-  "name": "capacitor-android-shorcuts",
+  "name": "capacitor-android-shortcuts",
   "version": "1.0.0",
   "description": "Add shortcuts in Android",
   "main": "dist/plugin.cjs.js",
