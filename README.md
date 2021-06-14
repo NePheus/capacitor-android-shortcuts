@@ -2,7 +2,7 @@
 
 # capacitor-android-shortcuts
 
-This plugin provides the feature to add a dynamic and pinned shortcut in Android apps. See more [in the Android docs](https://developer.android.com/guide/topics/ui/shortcuts).
+This plugin provides the feature to add a dynamic and pinned shortcuts in Android apps. See more [in the Android docs](https://developer.android.com/guide/topics/ui/shortcuts). Its possible to listen to a shortcut tap action and do some action (see `Usage`).
 
 ## Supported platforms
 
