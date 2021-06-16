@@ -69,7 +69,7 @@ AndroidShortcuts.addListener('shortcut', (response: any) => {
 });
 ```
 
-See also [Wiki: Icon Example](https://github.com/NePheus/capacitor-android-shortcuts/wiki/Icon-Example)
+See also [Wiki: Icon examples](https://github.com/NePheus/capacitor-android-shortcuts/wiki/Icon-examples)
 
 ## API
 
