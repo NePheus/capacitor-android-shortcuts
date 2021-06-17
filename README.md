@@ -51,7 +51,7 @@ if (AndroidShortcuts.isDynamicSupported()) {
 ...
 
 // Add pinned shortcuts
-if (AndroidShortcuts.isDynamicSupported()) {
+if (AndroidShortcuts.isPinnedSupported()) {
     AndroidShortcuts.addPinned(
         {
             id: 'mypinnedid',
