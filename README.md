@@ -4,6 +4,14 @@
 
 This plugin provides the feature to add a dynamic and pinned shortcuts in Android apps. See more [in the Android docs](https://developer.android.com/guide/topics/ui/shortcuts). Its possible to listen to a shortcut tap action and do some action (see `Usage`).
 
+**Dynamic shortcut**<br/>
+Tap and hold on the app icon and you will see the dynamic shortcuts in the dropdown<br/>
+=> Usage: Call the `addDynamic` method one time to add the array of dynamic shortcuts
+
+**Pinned shortcut**<br/>
+You can add a pinned shortcut programmatically inside your app, i.e. let a customer add a favorite of an article/product/... to the home screen<br/>
+=> Usage: Call the `addPinned` method where the user wants to pin something. An alert will be shown to add the pinned shortcut to the home screen.
+
 ## Supported platforms
 
 | Platform | Supported |
