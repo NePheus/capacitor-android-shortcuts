@@ -1,4 +1,5 @@
 [![npm version](https://badge.fury.io/js/capacitor-android-shortcuts.svg)](https://badge.fury.io/js/capacitor-android-shortcuts)
+[![capacitor support](https://img.shields.io/badge/capacitor%20support-v3-brightgreen?logo=capacitor)](https://capacitorjs.com/)
 
 # capacitor-android-shortcuts
 
