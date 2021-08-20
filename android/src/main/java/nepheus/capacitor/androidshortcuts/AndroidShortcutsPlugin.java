@@ -16,14 +16,14 @@ public class AndroidShortcutsPlugin extends Plugin {
     @PluginMethod
     public void isDynamicSupported(PluginCall call) {
         JSObject ret = new JSObject();
-        ret.put("value", implementation.isDynamicSupported(this.getContext()));
+        ret.put("result", implementation.isDynamicSupported(this.getContext()));
         call.resolve(ret);
     }
 
     @PluginMethod
     public void isPinnedSupported(PluginCall call) {
         JSObject ret = new JSObject();
-        ret.put("value", implementation.isPinnedSupported(this.getContext()));
+        ret.put("result", implementation.isPinnedSupported(this.getContext()));
         call.resolve(ret);
     }
 
