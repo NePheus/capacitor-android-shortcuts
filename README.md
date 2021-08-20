@@ -36,41 +36,44 @@ import { AndroidShortcuts } from 'capacitor-android-shortcuts';
 ...
 
 // Add dynamic shortcuts
-if (AndroidShortcuts.isDynamicSupported()) {
-    AndroidShortcuts.addDynamic({
-        items: [
-            {
-                id: 'myfirstid',
-                shortLabel: 'My first short label',
-                longLabel: 'My first long label',
-                iconBitmap: 'BASE64DATA',
-                data: 'I am a simple string'
-            },
-            {
-                id: 'mysecondid',
-                shortLabel: 'My first short label',
-                longLabel: 'My first long label',
-                iconBitmap: 'BASE64DATA',
-                data: JSON.stringify({ myProperty: 'Pass a stringified JSON object' })
-            },
-        ],
-    });
-}
-
+AndroidShortcuts.isDynamicSupported().then(({ result }) => {
+    if (result) {
+        AndroidShortcuts.addDynamic({
+            items: [
+                {
+                    id: "myfirstid",
+                    shortLabel: "My first short label",
+                    longLabel: "My first long label",
+                    iconBitmap: "BASE64DATA",
+                    data: "I am a simple string",
+                },
+                {
+                    id: "mysecondid",
+                    shortLabel: "My first short label",
+                    longLabel: "My first long label",
+                    iconBitmap: "BASE64DATA",
+                    data: JSON.stringify({
+                        myProperty: "Pass a stringified JSON object",
+                    }),
+                },
+            ],
+        });
+    }
+});
 ...
 
 // Add pinned shortcuts
-if (AndroidShortcuts.isPinnedSupported()) {
-    AndroidShortcuts.addPinned(
-        {
-            id: 'mypinnedid',
-            shortLabel: 'My pinned short label',
-            longLabel: 'My pinned long label',
-            iconBitmap: 'BASE64DATA',
-            data: 'I am a simple string'
-        }
-    );
-}
+AndroidShortcuts.isPinnedSupported().then(({ result }) => {
+    if (result) {
+        AndroidShortcuts.addPinned({
+            id: "mypinnedid",
+            shortLabel: "My pinned short label",
+            longLabel: "My pinned long label",
+            iconBitmap: "BASE64DATA",
+            data: "I am a simple string",
+        });
+    }
+});
 
 // Triggered when app is launched by a shortcut
 AndroidShortcuts.addListener('shortcut', (response: any) => {
