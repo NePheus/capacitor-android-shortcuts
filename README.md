@@ -69,7 +69,7 @@ if (AndroidShortcuts.isPinnedSupported()) {
             iconBitmap: 'BASE64DATA',
             data: 'I am a simple string'
         }
-    });
+    );
 }
 
 // Triggered when app is launched by a shortcut
