@@ -100,7 +100,8 @@ Checks if dynamic shortcuts are supported on the device
 
 **Returns:** <code>any</code>
 
----
+--------------------
+
 
 ### isPinnedSupported()
 
@@ -112,7 +113,8 @@ Checks if pinned shortcuts are supported on the device
 
 **Returns:** <code>any</code>
 
----
+--------------------
+
 
 ### addDynamic(...)
 
@@ -128,7 +130,8 @@ Created dynamic shortcuts
 
 **Returns:** <code>any</code>
 
----
+--------------------
+
 
 ### addPinned(...)
 
@@ -144,7 +147,8 @@ Created a pinned shortcut
 
 **Returns:** <code>any</code>
 
----
+--------------------
+
 
 ### addListener(...)
 
@@ -161,9 +165,11 @@ Add a listener to a shortcut tap event
 
 **Returns:** <code>any</code>
 
----
+--------------------
+
 
 ### Interfaces
+
 
 #### PluginListenerHandle
 
