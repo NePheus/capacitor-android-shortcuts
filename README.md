@@ -119,7 +119,7 @@ Checks if pinned shortcuts are supported on the device
 ### addDynamic(...)
 
 ```typescript
-addDynamic(options: { items: { id: string; shortLabel: string; longLabel: string; iconBitmap: string; data: string; }[]; }) => any
+addDynamic(options: { items: ShortcutItem[]; }) => any
 ```
 
 Created dynamic shortcuts
@@ -136,14 +136,14 @@ Created dynamic shortcuts
 ### addPinned(...)
 
 ```typescript
-addPinned(options: { id: string; shortLabel: string; longLabel: string; iconBitmap: string; data: string; }) => any
+addPinned(options: ShortcutItem) => any
 ```
 
 Created a pinned shortcut
 
-| Param         | Type                                                                                                  | Description                              |
-| ------------- | ----------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| **`options`** | <code>{ id: string; shortLabel: string; longLabel: string; iconBitmap: string; data: string; }</code> | An option object for the pinned shortcut |
+| Param         | Type                                                                                                                                  | Description                              |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| **`options`** | <code>{ id: string; shortLabel: string; longLabel: string; icon?: { type: AvailableIconTypes; name: string; }; data: string; }</code> | An option object for the pinned shortcut |
 
 **Returns:** <code>any</code>
 
@@ -158,10 +158,10 @@ addListener(eventName: 'shortcut', listenerFunc: MessageListener) => Promise<Plu
 
 Add a listener to a shortcut tap event
 
-| Param              | Type                                    |
-| ------------------ | --------------------------------------- |
-| **`eventName`**    | <code>"shortcut"</code>                 |
-| **`listenerFunc`** | <code>(response: any) =&gt; void</code> |
+| Param              | Type                                                  |
+| ------------------ | ----------------------------------------------------- |
+| **`eventName`**    | <code>"shortcut"</code>                               |
+| **`listenerFunc`** | <code>(response: { data: string; }) =&gt; void</code> |
 
 **Returns:** <code>any</code>
 

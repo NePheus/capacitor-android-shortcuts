@@ -1,12 +1,21 @@
 package nepheus.capacitor.androidshortcuts;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Icon;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 @CapacitorPlugin(name = "AndroidShortcuts")
 public class AndroidShortcutsPlugin extends Plugin {
@@ -41,15 +50,24 @@ public class AndroidShortcutsPlugin extends Plugin {
     }
 
     @PluginMethod
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void addPinned(PluginCall call) {
         String id = call.getString("id");
         String shortLabel = call.getString("shortLabel");
         String longLabel = call.getString("longLabel");
-        String iconBitmap = call.getString("iconBitmap");
         String data = call.getString("data");
 
+        ShortcutIcon shortcutIcon = null;
         try {
-            implementation.addPinned(this.getBridge(), id, shortLabel, longLabel, iconBitmap, data);
+            JSONObject iconObject = call.getObject("icon");
+            shortcutIcon = new ShortcutIcon(iconObject.getString("type"), iconObject.getString("name"));
+        } catch (JSONException e) {
+            System.out.println("'icon' Object is not parsable");
+        }
+
+        try {
+            Icon icon = implementation.generateIcon(bridge, shortcutIcon);
+            implementation.addPinned(this.getBridge(), id, shortLabel, longLabel, icon, data);
         } catch (Exception e) {
             call.reject(e.getMessage());
         }
