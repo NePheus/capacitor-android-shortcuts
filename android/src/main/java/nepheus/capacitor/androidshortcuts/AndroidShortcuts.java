@@ -6,6 +6,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Icon;
@@ -50,17 +51,27 @@ public class AndroidShortcuts {
             String id = item.getString("id");
             String shortLabel = item.getString("shortLabel");
             String longLabel = item.getString("longLabel");
-            String iconBitmap = item.getString("iconBitmap");
             String data = item.getString("data");
-            ShortcutInfo shortcut = buildShortcut(shortcutManager, bridge, id, shortLabel, longLabel, iconBitmap, data);
+
+            ShortcutIcon shortcutIcon = null;
+            try {
+                JSONObject iconObject = item.getJSONObject("icon");
+                shortcutIcon = new ShortcutIcon(iconObject.getString("type"), iconObject.getString("name"));
+            } catch (JSONException e) {
+                System.out.println("'icon' Object is not parsable");
+            }
+
+            Icon icon = this.generateIcon(bridge, shortcutIcon);
+
+            ShortcutInfo shortcut = buildShortcut(bridge, id, shortLabel, longLabel, icon, data);
             shortcuts.add(shortcut);
         }
 
         shortcutManager.setDynamicShortcuts(shortcuts);
     }
 
-    public void addPinned(Bridge bridge, String id, String shortLabel, String longLabel, String iconBitmap, String data)
-        throws UnsupportedOperationException, PackageManager.NameNotFoundException {
+    public void addPinned(Bridge bridge, String id, String shortLabel, String longLabel, Icon icon, String data)
+        throws UnsupportedOperationException {
         if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.O) {
             throw new UnsupportedOperationException("Pinned shortcuts are not supported on this device");
         }
@@ -71,21 +82,55 @@ public class AndroidShortcuts {
             throw new UnsupportedOperationException("Pinned shortcuts are not supported on this device");
         }
 
-        ShortcutInfo shortcut = buildShortcut(shortcutManager, bridge, id, shortLabel, longLabel, iconBitmap, data);
+        ShortcutInfo shortcut = buildShortcut(bridge, id, shortLabel, longLabel, icon, data);
 
         shortcutManager.requestPinShortcut(shortcut, null);
     }
 
+    /**
+     * Generates an Icon based on the given parameter
+     * @param shortcutIcon parameter of the icon that should be set
+     * @return
+     */
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public Icon generateIcon(
+            Bridge bridge, ShortcutIcon shortcutIcon) throws PackageManager.NameNotFoundException {
+        if (shortcutIcon == null) {
+            return this.getDefaultIcon(bridge);
+        }
+
+        try {
+            if (shortcutIcon.getType().equals("Bitmap")) {
+                return Icon.createWithBitmap(decodeBase64Bitmap(shortcutIcon.getName()));
+            } else if (shortcutIcon.getType().equals("Ressource")) {
+                Resources activityRes = bridge.getContext().getResources();
+                String activityPackage = bridge.getActivity().getPackageName();
+                return Icon.createWithResource(bridge.getContext(), activityRes.getIdentifier(shortcutIcon.getName(), "drawable", activityPackage));
+            } else {
+                throw new InvalidParameterException("Parameter 'icon.type' is invalid");
+            }
+        } catch (Exception e) {
+            return this.getDefaultIcon(bridge);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private Icon getDefaultIcon(Bridge bridge) throws PackageManager.NameNotFoundException {
+        Context context = bridge.getContext();
+        PackageManager pm = context.getPackageManager();
+        ApplicationInfo applicationInfo = pm.getApplicationInfo(bridge.getActivity().getPackageName(), PackageManager.GET_META_DATA);
+        return Icon.createWithResource(bridge.getActivity().getPackageName(), applicationInfo.icon);
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.N_MR1)
     private ShortcutInfo buildShortcut(
-        ShortcutManager shortcutManager,
         Bridge bridge,
         String id,
         String shortLabel,
         String longLabel,
-        String iconBitmap,
+        Icon icon,
         String data
-    ) throws InvalidParameterException, PackageManager.NameNotFoundException {
+    ) throws InvalidParameterException {
         if (id.length() == 0) {
             throw new InvalidParameterException("Parameter 'Id' invalid");
         }
@@ -96,15 +141,6 @@ public class AndroidShortcuts {
 
         Context context = bridge.getContext();
         ShortcutInfo.Builder builder = new ShortcutInfo.Builder(context, id);
-
-        Icon icon;
-        try {
-            icon = Icon.createWithBitmap(decodeBase64Bitmap(iconBitmap));
-        } catch (Exception e) {
-            PackageManager pm = context.getPackageManager();
-            ApplicationInfo applicationInfo = pm.getApplicationInfo(bridge.getActivity().getPackageName(), PackageManager.GET_META_DATA);
-            icon = Icon.createWithResource(bridge.getActivity().getPackageName(), applicationInfo.icon);
-        }
 
         Intent intent = new Intent(
             Intent.EXTRA_SHORTCUT_INTENT,

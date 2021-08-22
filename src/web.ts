@@ -1,6 +1,6 @@
 import { WebPlugin } from '@capacitor/core';
 
-import { MessageListener, AndroidShortcutsPlugin } from './definitions';
+import { ShortcutItem, MessageListener, AndroidShortcutsPlugin } from './definitions';
 
 export class AndroidShortcutsWeb
   extends WebPlugin
@@ -12,29 +12,17 @@ export class AndroidShortcutsWeb
     throw new Error('Method not implemented.');
   }
   addDynamic(options: {
-    items: {
-      id: string;
-      shortLabel: string;
-      longLabel: string;
-      iconBitmap: string;
-      data: string;
-    }[];
+    items: ShortcutItem[];
   }): Promise<void> {
     console.error("Method 'add' not implemented.", JSON.stringify(options));
     return Promise.reject("Method 'add' not implemented.") as any;
   }
-  addPinned(options: {
-    id: string;
-    shortLabel: string;
-    longLabel: string;
-    iconBitmap: string;
-    data: string;
-  }): Promise<void> {
+  addPinned(options: ShortcutItem): Promise<void> {
     console.error("Method 'add' not implemented.", options);
     return Promise.reject("Method 'add' not implemented.") as any;
   }
   addListener(eventName: 'shortcut', listenerFunc: MessageListener) {
-    listenerFunc(null);
+    listenerFunc({ data: "" });
     return Promise.reject(
       `Listener for '${eventName}' not implemented.`,
     ) as any;
