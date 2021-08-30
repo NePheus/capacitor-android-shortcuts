@@ -56,7 +56,7 @@ public class AndroidShortcuts {
             ShortcutIcon shortcutIcon = null;
             try {
                 JSONObject iconObject = item.getJSONObject("icon");
-                shortcutIcon = new ShortcutIcon(iconObject.getString("type"), iconObject.getString("name"));
+                shortcutIcon = new ShortcutIcon(ShortcutIconEnum.valueOf(iconObject.getString("type")), iconObject.getString("name"));
             } catch (JSONException e) {
                 System.out.println("'icon' Object is not parsable");
             }
@@ -100,9 +100,9 @@ public class AndroidShortcuts {
         }
 
         try {
-            if (shortcutIcon.getType().equals("Bitmap")) {
+            if (shortcutIcon.getType().equals(ShortcutIconEnum.Bitmap)) {
                 return Icon.createWithBitmap(decodeBase64Bitmap(shortcutIcon.getName()));
-            } else if (shortcutIcon.getType().equals("Ressource")) {
+            } else if (shortcutIcon.getType().equals(ShortcutIconEnum.Resource)) {
                 Resources activityRes = bridge.getContext().getResources();
                 String activityPackage = bridge.getActivity().getPackageName();
                 return Icon.createWithResource(bridge.getContext(), activityRes.getIdentifier(shortcutIcon.getName(), "drawable", activityPackage));

@@ -1,6 +1,6 @@
-import { PluginListenerHandle } from '@capacitor/core';
+import type { PluginListenerHandle } from '@capacitor/core';
 
-export type AvailableIconTypes = "Bitmap" | "Ressource";
+export type AvailableIconTypes = "Bitmap" | "Resource";
 
 export type ShortcutItem = {
   /**
@@ -22,7 +22,7 @@ export type ShortcutItem = {
   longLabel: string;
   /**
    * Defines the icon of the shortcut.
-   * You can set the icon as a BASE64-Bitmap or as a Ressource name
+   * You can set the icon as a BASE64-Bitmap or as a Resource name
    */
   icon?: {
     /**
@@ -30,7 +30,7 @@ export type ShortcutItem = {
      */
     type: AvailableIconTypes;
     /**
-     * Name of te Ressource or data of the encoded Bitmap
+     * Name of te Resource or data of the encoded Bitmap
      */
     name: string;
   }
