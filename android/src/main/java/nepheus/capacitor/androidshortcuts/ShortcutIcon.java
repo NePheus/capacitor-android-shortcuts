@@ -1,20 +1,21 @@
 package nepheus.capacitor.androidshortcuts;
 
 public class ShortcutIcon {
-    private final String type;
+    private final ShortcutIconEnum type;
 
     private final String name;
 
-    public ShortcutIcon(String type, String name) {
+    public ShortcutIcon(ShortcutIconEnum type, String name) {
         this.type = type;
         this.name = name;
     }
 
     /**
-     * Returns the type of the icon. Can be: "Bitmap" or "Ressource"
-     * @return "Bitmap" or "Ressource"
+     * Returns the type of the icon as an enum.
+     * 
+     * @return type of the icon
      */
-    public String getType() {
+    public ShortcutIconEnum getType() {
         return this.type;
     }
 

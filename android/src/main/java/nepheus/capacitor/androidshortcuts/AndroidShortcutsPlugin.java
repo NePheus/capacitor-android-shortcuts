@@ -1,7 +1,6 @@
 package nepheus.capacitor.androidshortcuts;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 
@@ -60,7 +59,7 @@ public class AndroidShortcutsPlugin extends Plugin {
         ShortcutIcon shortcutIcon = null;
         try {
             JSONObject iconObject = call.getObject("icon");
-            shortcutIcon = new ShortcutIcon(iconObject.getString("type"), iconObject.getString("name"));
+            shortcutIcon = new ShortcutIcon(ShortcutIconEnum.valueOf(iconObject.getString("type")), iconObject.getString("name"));
         } catch (JSONException e) {
             System.out.println("'icon' Object is not parsable");
         }

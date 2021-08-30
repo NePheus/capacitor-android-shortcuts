@@ -44,14 +44,20 @@ AndroidShortcuts.isDynamicSupported().then(({ result }) => {
                     id: "myfirstid",
                     shortLabel: "My first short label",
                     longLabel: "My first long label",
-                    iconBitmap: "BASE64DATA",
+                    icon: {
+                        type: "Bitmap",
+                        name: "<base64-string>"
+                    },
                     data: "I am a simple string",
                 },
                 {
                     id: "mysecondid",
                     shortLabel: "My first short label",
                     longLabel: "My first long label",
-                    iconBitmap: "BASE64DATA",
+                    icon: {
+                        type: "Resource",
+                        name: "<vector-asset-name>"
+                    },
                     data: JSON.stringify({
                         myProperty: "Pass a stringified JSON object",
                     }),
@@ -69,7 +75,10 @@ AndroidShortcuts.isPinnedSupported().then(({ result }) => {
             id: "mypinnedid",
             shortLabel: "My pinned short label",
             longLabel: "My pinned long label",
-            iconBitmap: "BASE64DATA",
+            icon: {
+                type: "Bitmap",
+                name: "<base64-string>"
+            },
             data: "I am a simple string",
         });
     }
