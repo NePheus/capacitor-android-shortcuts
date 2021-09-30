@@ -82,7 +82,7 @@ public class AndroidShortcutsPlugin extends Plugin {
     protected void handleOnNewIntent(Intent intent) {
         super.handleOnNewIntent(intent);
 
-        if (intent.getAction().equals(Intent.EXTRA_SHORTCUT_INTENT)) {
+        if (Intent.EXTRA_SHORTCUT_INTENT.equals(intent.getAction())) {
             JSObject ret = new JSObject();
             ret.put("data", intent.getStringExtra("data"));
             notifyListeners("shortcut", ret, true);
