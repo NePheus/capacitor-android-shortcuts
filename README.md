@@ -1,5 +1,5 @@
 [![npm version](https://badge.fury.io/js/capacitor-android-shortcuts.svg)](https://badge.fury.io/js/capacitor-android-shortcuts)
-[![capacitor support](https://img.shields.io/badge/capacitor%20support-v3-brightgreen?logo=capacitor)](https://capacitorjs.com/)
+[![capacitor support](https://img.shields.io/badge/capacitor%20support-v4-brightgreen?logo=capacitor)](https://capacitorjs.com/)
 
 # capacitor-android-shortcuts
 
@@ -109,8 +109,7 @@ Checks if dynamic shortcuts are supported on the device
 
 **Returns:** <code>any</code>
 
---------------------
-
+---
 
 ### isPinnedSupported()
 
@@ -122,8 +121,7 @@ Checks if pinned shortcuts are supported on the device
 
 **Returns:** <code>any</code>
 
---------------------
-
+---
 
 ### addDynamic(...)
 
@@ -139,8 +137,7 @@ Created dynamic shortcuts
 
 **Returns:** <code>any</code>
 
---------------------
-
+---
 
 ### addPinned(...)
 
@@ -156,8 +153,7 @@ Created a pinned shortcut
 
 **Returns:** <code>any</code>
 
---------------------
-
+---
 
 ### addListener(...)
 
@@ -174,11 +170,9 @@ Add a listener to a shortcut tap event
 
 **Returns:** <code>any</code>
 
---------------------
-
+---
 
 ### Interfaces
-
 
 #### PluginListenerHandle
 
