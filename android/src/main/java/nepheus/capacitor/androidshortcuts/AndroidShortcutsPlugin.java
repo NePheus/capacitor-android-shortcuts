@@ -3,16 +3,13 @@ package nepheus.capacitor.androidshortcuts;
 import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.os.Build;
-
 import androidx.annotation.RequiresApi;
-
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,6 +36,11 @@ public class AndroidShortcutsPlugin extends Plugin {
     public void addDynamic(PluginCall call) {
         JSArray items = call.getArray("items");
 
+        if (items == null) {
+            call.reject("'items' array must be set");
+            return;
+        }
+
         try {
             implementation.addDynamic(this.getBridge(), items);
         } catch (Exception e) {
@@ -59,9 +61,14 @@ public class AndroidShortcutsPlugin extends Plugin {
         ShortcutIcon shortcutIcon = null;
         try {
             JSONObject iconObject = call.getObject("icon");
+            if (iconObject == null) {
+                call.reject("'icon' object must be set");
+                return;
+            }
             shortcutIcon = new ShortcutIcon(ShortcutIconEnum.valueOf(iconObject.getString("type")), iconObject.getString("name"));
         } catch (JSONException e) {
-            System.out.println("'icon' Object is not parsable");
+            call.reject("'icon' object is not parsable");
+            return;
         }
 
         try {
