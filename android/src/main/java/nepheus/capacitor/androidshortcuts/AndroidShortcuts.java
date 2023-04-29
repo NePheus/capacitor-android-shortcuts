@@ -36,7 +36,7 @@ public class AndroidShortcuts {
         return false;
     }
 
-    public void addDynamic(Bridge bridge, JSArray items) throws PackageManager.NameNotFoundException, JSONException {
+    public void setDynamic(Bridge bridge, JSArray items) throws PackageManager.NameNotFoundException, JSONException {
         if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.N_MR1) {
             throw new UnsupportedOperationException("Dynamic shortcuts are not supported on this device");
         }
@@ -70,7 +70,7 @@ public class AndroidShortcuts {
         shortcutManager.setDynamicShortcuts(shortcuts);
     }
 
-    public void addPinned(Bridge bridge, String id, String shortLabel, String longLabel, Icon icon, String data)
+    public void pin(Bridge bridge, String id, String shortLabel, String longLabel, Icon icon, String data)
         throws UnsupportedOperationException {
         if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.O) {
             throw new UnsupportedOperationException("Pinned shortcuts are not supported on this device");

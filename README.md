@@ -7,11 +7,11 @@ This plugin provides the feature to add dynamic and pinned shortcuts in Android 
 
 **Dynamic shortcut**<br/>
 Tap and hold on the app icon and you will see the dynamic shortcuts in the dropdown<br/>
-=> Usage: Call the `addDynamic` method one time to add the array of dynamic shortcuts
+=> Usage: Call the `setDynamic` method one time to set the array of dynamic shortcuts
 
 **Pinned shortcut**<br/>
 You can add a pinned shortcut programmatically inside your app, i.e. let a customer add a favorite of an article/product/... to the home screen<br/>
-=> Usage: Call the `addPinned` method where the user wants to pin something. An alert will be shown to add the pinned shortcut to the home screen.
+=> Usage: Call the `pin` method where the user wants to pin something. An alert will be shown to add the pinned shortcut to the home screen.
 
 ## Supported platforms
 
@@ -35,10 +35,10 @@ import { AndroidShortcuts } from 'capacitor-android-shortcuts';
 
 ...
 
-// Add dynamic shortcuts
+// Set dynamic shortcuts
 AndroidShortcuts.isDynamicSupported().then(({ result }) => {
     if (result) {
-        AndroidShortcuts.addDynamic({
+        AndroidShortcuts.setDynamic({
             items: [
                 {
                     id: "myfirstid",
@@ -68,10 +68,10 @@ AndroidShortcuts.isDynamicSupported().then(({ result }) => {
 });
 ...
 
-// Add pinned shortcuts
+// Add a pinned shortcut
 AndroidShortcuts.isPinnedSupported().then(({ result }) => {
     if (result) {
-        AndroidShortcuts.addPinned({
+        AndroidShortcuts.pin({
             id: "mypinnedid",
             shortLabel: "My pinned short label",
             longLabel: "My pinned long label",
@@ -90,7 +90,9 @@ AndroidShortcuts.addListener('shortcut', (response: any) => {
 });
 ```
 
-See also [Wiki: Icon examples](https://github.com/NePheus/capacitor-android-shortcuts/wiki/Icon-examples)
+## Usage of icons
+
+See [Wiki: Icon examples](https://github.com/NePheus/capacitor-android-shortcuts/wiki/Icon-examples)
 
 ## API
 
@@ -125,13 +127,65 @@ Checks if pinned shortcuts are supported on the device
 --------------------
 
 
+### setDynamic(...)
+
+```typescript
+setDynamic(options: { items: ShortcutItem[]; }) => any
+```
+
+Set dynamic shortcuts
+
+| Param         | Type                        | Description                                      |
+| ------------- | --------------------------- | ------------------------------------------------ |
+| **`options`** | <code>{ items: {}; }</code> | An items array with the options of each shortcut |
+
+**Returns:** <code>any</code>
+
+--------------------
+
+
+### pin(...)
+
+```typescript
+pin(options: ShortcutItem) => any
+```
+
+Add a pinned shortcut
+
+| Param         | Type                                                  | Description                              |
+| ------------- | ----------------------------------------------------- | ---------------------------------------- |
+| **`options`** | <code><a href="#shortcutitem">ShortcutItem</a></code> | An option object for the pinned shortcut |
+
+**Returns:** <code>any</code>
+
+--------------------
+
+
+### addListener('shortcut', ...)
+
+```typescript
+addListener(eventName: 'shortcut', listenerFunc: (response: { data: string; }) => void) => Promise<PluginListenerHandle> & PluginListenerHandle
+```
+
+Add a listener to a shortcut tap event
+
+| Param              | Type                                                  |
+| ------------------ | ----------------------------------------------------- |
+| **`eventName`**    | <code>'shortcut'</code>                               |
+| **`listenerFunc`** | <code>(response: { data: string; }) =&gt; void</code> |
+
+**Returns:** <code>any</code>
+
+--------------------
+
+
 ### addDynamic(...)
 
 ```typescript
 addDynamic(options: { items: ShortcutItem[]; }) => any
 ```
 
-Created dynamic shortcuts
+Set dynamic shortcuts
 
 | Param         | Type                        | Description                                      |
 | ------------- | --------------------------- | ------------------------------------------------ |
@@ -148,29 +202,11 @@ Created dynamic shortcuts
 addPinned(options: ShortcutItem) => any
 ```
 
-Created a pinned shortcut
+Add a pinned shortcut
 
-| Param         | Type                                                                                                                                  | Description                              |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| **`options`** | <code>{ id: string; shortLabel: string; longLabel: string; icon?: { type: AvailableIconTypes; name: string; }; data: string; }</code> | An option object for the pinned shortcut |
-
-**Returns:** <code>any</code>
-
---------------------
-
-
-### addListener(...)
-
-```typescript
-addListener(eventName: 'shortcut', listenerFunc: MessageListener) => Promise<PluginListenerHandle> & PluginListenerHandle
-```
-
-Add a listener to a shortcut tap event
-
-| Param              | Type                                                  |
-| ------------------ | ----------------------------------------------------- |
-| **`eventName`**    | <code>"shortcut"</code>                               |
-| **`listenerFunc`** | <code>(response: { data: string; }) =&gt; void</code> |
+| Param         | Type                                                  | Description                              |
+| ------------- | ----------------------------------------------------- | ---------------------------------------- |
+| **`options`** | <code><a href="#shortcutitem">ShortcutItem</a></code> | An option object for the pinned shortcut |
 
 **Returns:** <code>any</code>
 
@@ -180,10 +216,29 @@ Add a listener to a shortcut tap event
 ### Interfaces
 
 
+#### ShortcutItem
+
+| Prop             | Type                                                                                       | Description                                                                                                                                                                                                                                                                                                  |
+| ---------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **`id`**         | <code>string</code>                                                                        | ID of the shortcut                                                                                                                                                                                                                                                                                           |
+| **`shortLabel`** | <code>string</code>                                                                        | Sets the short title of a shortcut. This is a mandatory field when publishing a new shortcut with ShortcutManager.addDynamicShortcuts(List) or ShortcutManager.setDynamicShortcuts(List). This field is intended to be a concise description of a shortcut. The recommended maximum length is 10 characters. |
+| **`longLabel`**  | <code>string</code>                                                                        | Sets the text of a shortcut. This field is intended to be more descriptive than the shortcut title. The launcher shows this instead of the short title when it has enough space. The recommend maximum length is 25 characters.                                                                              |
+| **`icon`**       | <code>{ type: <a href="#availableicontypes">AvailableIconTypes</a>; name: string; }</code> | Defines the icon of the shortcut. You can set the icon as a BASE64-Bitmap or as a Resource name                                                                                                                                                                                                              |
+| **`data`**       | <code>string</code>                                                                        | Data that is passed to the 'shortcut' event                                                                                                                                                                                                                                                                  |
+
+
 #### PluginListenerHandle
 
 | Prop         | Type                      |
 | ------------ | ------------------------- |
 | **`remove`** | <code>() =&gt; any</code> |
+
+
+### Type Aliases
+
+
+#### AvailableIconTypes
+
+<code>'Bitmap' | 'Resource'</code>
 
 </docgen-api>

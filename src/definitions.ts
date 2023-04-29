@@ -1,8 +1,8 @@
 import type { PluginListenerHandle } from '@capacitor/core';
 
-export type AvailableIconTypes = "Bitmap" | "Resource";
+export type AvailableIconTypes = 'Bitmap' | 'Resource';
 
-export type ShortcutItem = {
+export interface ShortcutItem {
   /**
    * ID of the shortcut
    */
@@ -33,12 +33,12 @@ export type ShortcutItem = {
      * Name of te Resource or data of the encoded Bitmap
      */
     name: string;
-  }
+  };
   /**
-   * Data you will receive when the shortcut is opened
+   * Data that is passed to the 'shortcut' event
    */
   data: string;
-};
+}
 
 export interface AndroidShortcutsPlugin {
   /**
@@ -50,17 +50,15 @@ export interface AndroidShortcutsPlugin {
    */
   isPinnedSupported(): Promise<{ result: boolean }>;
   /**
-   * Created dynamic shortcuts
+   * Set dynamic shortcuts
    * @param options An items array with the options of each shortcut
    */
-  addDynamic(options: {
-    items: ShortcutItem[];
-  }): Promise<void>;
+  setDynamic(options: { items: ShortcutItem[] }): Promise<void>;
   /**
-   * Created a pinned shortcut
+   * Add a pinned shortcut
    * @param options An option object for the pinned shortcut
    */
-  addPinned(options: ShortcutItem): Promise<void>;
+  pin(options: ShortcutItem): Promise<void>;
   /**
    * Add a listener to a shortcut tap event
    * @param eventName
@@ -68,8 +66,19 @@ export interface AndroidShortcutsPlugin {
    */
   addListener(
     eventName: 'shortcut',
-    listenerFunc: MessageListener,
+    listenerFunc: (response: { data: string }) => void,
   ): Promise<PluginListenerHandle> & PluginListenerHandle;
-}
 
-export type MessageListener = (response: { data: string }) => void;
+  /**
+   * Set dynamic shortcuts
+   * @param options An items array with the options of each shortcut
+   * @deprecated This function will be removed in future releases. Use {@link #setDynamic()} instead.
+   */
+  addDynamic(options: { items: ShortcutItem[] }): Promise<void>;
+  /**
+   * Add a pinned shortcut
+   * @param options An option object for the pinned shortcut
+   * @deprecated This function will be removed in future releases. Use {@link #pin()} instead.
+   */
+  addPinned(options: ShortcutItem): Promise<void>;
+}

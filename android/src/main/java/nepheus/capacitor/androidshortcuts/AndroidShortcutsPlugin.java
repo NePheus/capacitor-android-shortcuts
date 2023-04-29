@@ -33,7 +33,7 @@ public class AndroidShortcutsPlugin extends Plugin {
     }
 
     @PluginMethod
-    public void addDynamic(PluginCall call) {
+    public void setDynamic(PluginCall call) {
         JSArray items = call.getArray("items");
 
         if (items == null) {
@@ -42,7 +42,7 @@ public class AndroidShortcutsPlugin extends Plugin {
         }
 
         try {
-            implementation.addDynamic(this.getBridge(), items);
+            implementation.setDynamic(this.getBridge(), items);
         } catch (Exception e) {
             call.reject(e.getMessage());
         }
@@ -50,9 +50,18 @@ public class AndroidShortcutsPlugin extends Plugin {
         call.resolve();
     }
 
+    /**
+     * @deprecated This function will be removed in future releases. Use {@link #setDynamic()} instead.
+     */
     @PluginMethod
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public void addPinned(PluginCall call) {
+    public void addDynamic(PluginCall call) {
+        setDynamic(call);
+    }
+
+    @PluginMethod
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void pin(PluginCall call) {
         String id = call.getString("id");
         String shortLabel = call.getString("shortLabel");
         String longLabel = call.getString("longLabel");
@@ -73,12 +82,21 @@ public class AndroidShortcutsPlugin extends Plugin {
 
         try {
             Icon icon = implementation.generateIcon(bridge, shortcutIcon);
-            implementation.addPinned(this.getBridge(), id, shortLabel, longLabel, icon, data);
+            implementation.pin(this.getBridge(), id, shortLabel, longLabel, icon, data);
         } catch (Exception e) {
             call.reject(e.getMessage());
         }
 
         call.resolve();
+    }
+
+    /**
+     * @deprecated This function will be removed in future releases. Use {@link #pin()} instead.
+     */
+    @PluginMethod
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void addPinned(PluginCall call) {
+        pin(call);
     }
 
     /**

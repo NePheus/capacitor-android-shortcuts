@@ -1,6 +1,6 @@
 {
   "name": "capacitor-android-shortcuts",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "Add shortcuts in Android",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -43,7 +43,7 @@
   "devDependencies": {
     "@capacitor/android": "^4.0.0",
     "@capacitor/core": "^4.0.0",
-    "@capacitor/docgen": "^0.0.10",
+    "@capacitor/docgen": "^0.2.1",
     "@ionic/eslint-config": "^0.3.0",
     "@ionic/prettier-config": "^1.0.1",
     "@ionic/swiftlint-config": "^1.1.2",
