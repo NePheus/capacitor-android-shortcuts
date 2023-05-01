@@ -1,6 +1,6 @@
 {
   "name": "capacitor-android-shortcuts",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "description": "Add shortcuts in Android",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",

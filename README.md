@@ -185,7 +185,7 @@ Add a listener to a shortcut tap event
 addDynamic(options: { items: ShortcutItem[]; }) => any
 ```
 
-Set dynamic shortcuts
+**DEPRECATED - Use `setDynamic`**
 
 | Param         | Type                        | Description                                      |
 | ------------- | --------------------------- | ------------------------------------------------ |
@@ -202,7 +202,7 @@ Set dynamic shortcuts
 addPinned(options: ShortcutItem) => any
 ```
 
-Add a pinned shortcut
+**DEPRECATED - Use `pin`**
 
 | Param         | Type                                                  | Description                              |
 | ------------- | ----------------------------------------------------- | ---------------------------------------- |

@@ -70,13 +70,13 @@ export interface AndroidShortcutsPlugin {
   ): Promise<PluginListenerHandle> & PluginListenerHandle;
 
   /**
-   * Set dynamic shortcuts
+   * **DEPRECATED - Use `setDynamic`**
    * @param options An items array with the options of each shortcut
    * @deprecated This function will be removed in future releases. Use {@link #setDynamic()} instead.
    */
   addDynamic(options: { items: ShortcutItem[] }): Promise<void>;
   /**
-   * Add a pinned shortcut
+   * **DEPRECATED - Use `pin`**
    * @param options An option object for the pinned shortcut
    * @deprecated This function will be removed in future releases. Use {@link #pin()} instead.
    */
