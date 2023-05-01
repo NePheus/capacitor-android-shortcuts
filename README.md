@@ -179,6 +179,19 @@ Add a listener to a shortcut tap event
 --------------------
 
 
+### removeAllListeners()
+
+```typescript
+removeAllListeners() => any
+```
+
+Removes all listeners.
+
+**Returns:** <code>any</code>
+
+--------------------
+
+
 ### addDynamic(...)
 
 ```typescript

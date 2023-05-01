@@ -68,6 +68,10 @@ export interface AndroidShortcutsPlugin {
     eventName: 'shortcut',
     listenerFunc: (response: { data: string }) => void,
   ): Promise<PluginListenerHandle> & PluginListenerHandle;
+  /**
+   * Removes all listeners.
+   */
+  removeAllListeners(): Promise<void>;
 
   /**
    * **DEPRECATED - Use `setDynamic`**
