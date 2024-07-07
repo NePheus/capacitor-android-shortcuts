@@ -50,15 +50,6 @@ public class AndroidShortcutsPlugin extends Plugin {
         call.resolve();
     }
 
-    /**
-     * @deprecated This function will be removed in future releases. Use {@link #setDynamic()} instead.
-     */
-    @PluginMethod
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public void addDynamic(PluginCall call) {
-        setDynamic(call);
-    }
-
     @PluginMethod
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void pin(PluginCall call) {
@@ -88,15 +79,6 @@ public class AndroidShortcutsPlugin extends Plugin {
         }
 
         call.resolve();
-    }
-
-    /**
-     * @deprecated This function will be removed in future releases. Use {@link #pin()} instead.
-     */
-    @PluginMethod
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public void addPinned(PluginCall call) {
-        pin(call);
     }
 
     /**

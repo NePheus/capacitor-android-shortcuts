@@ -1,5 +1,5 @@
 [![npm version](https://badge.fury.io/js/capacitor-android-shortcuts.svg)](https://badge.fury.io/js/capacitor-android-shortcuts)
-[![capacitor support](https://img.shields.io/badge/capacitor%20support-v5-brightgreen?logo=capacitor)](https://capacitorjs.com/)
+[![capacitor support](https://img.shields.io/badge/capacitor%20support-v6-brightgreen?logo=capacitor)](https://capacitorjs.com/)
 
 # capacitor-android-shortcuts
 
@@ -104,12 +104,12 @@ See [Wiki: Icon examples](https://github.com/NePheus/capacitor-android-shortcuts
 ### isDynamicSupported()
 
 ```typescript
-isDynamicSupported() => any
+isDynamicSupported() => Promise<{ result: boolean; }>
 ```
 
 Checks if dynamic shortcuts are supported on the device
 
-**Returns:** <code>any</code>
+**Returns:** <code>Promise&lt;{ result: boolean; }&gt;</code>
 
 --------------------
 
@@ -117,12 +117,12 @@ Checks if dynamic shortcuts are supported on the device
 ### isPinnedSupported()
 
 ```typescript
-isPinnedSupported() => any
+isPinnedSupported() => Promise<{ result: boolean; }>
 ```
 
 Checks if pinned shortcuts are supported on the device
 
-**Returns:** <code>any</code>
+**Returns:** <code>Promise&lt;{ result: boolean; }&gt;</code>
 
 --------------------
 
@@ -130,16 +130,14 @@ Checks if pinned shortcuts are supported on the device
 ### setDynamic(...)
 
 ```typescript
-setDynamic(options: { items: ShortcutItem[]; }) => any
+setDynamic(options: { items: ShortcutItem[]; }) => Promise<void>
 ```
 
 Set dynamic shortcuts
 
-| Param         | Type                        | Description                                      |
-| ------------- | --------------------------- | ------------------------------------------------ |
-| **`options`** | <code>{ items: {}; }</code> | An items array with the options of each shortcut |
-
-**Returns:** <code>any</code>
+| Param         | Type                                    | Description                                      |
+| ------------- | --------------------------------------- | ------------------------------------------------ |
+| **`options`** | <code>{ items: ShortcutItem[]; }</code> | An items array with the options of each shortcut |
 
 --------------------
 
@@ -147,7 +145,7 @@ Set dynamic shortcuts
 ### pin(...)
 
 ```typescript
-pin(options: ShortcutItem) => any
+pin(options: ShortcutItem) => Promise<void>
 ```
 
 Add a pinned shortcut
@@ -155,8 +153,6 @@ Add a pinned shortcut
 | Param         | Type                                                  | Description                              |
 | ------------- | ----------------------------------------------------- | ---------------------------------------- |
 | **`options`** | <code><a href="#shortcutitem">ShortcutItem</a></code> | An option object for the pinned shortcut |
-
-**Returns:** <code>any</code>
 
 --------------------
 
@@ -174,7 +170,7 @@ Add a listener to a shortcut tap event
 | **`eventName`**    | <code>'shortcut'</code>                               |
 | **`listenerFunc`** | <code>(response: { data: string; }) =&gt; void</code> |
 
-**Returns:** <code>any</code>
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
 
 --------------------
 
@@ -182,46 +178,10 @@ Add a listener to a shortcut tap event
 ### removeAllListeners()
 
 ```typescript
-removeAllListeners() => any
+removeAllListeners() => Promise<void>
 ```
 
 Removes all listeners.
-
-**Returns:** <code>any</code>
-
---------------------
-
-
-### addDynamic(...)
-
-```typescript
-addDynamic(options: { items: ShortcutItem[]; }) => any
-```
-
-**DEPRECATED - Use `setDynamic`**
-
-| Param         | Type                        | Description                                      |
-| ------------- | --------------------------- | ------------------------------------------------ |
-| **`options`** | <code>{ items: {}; }</code> | An items array with the options of each shortcut |
-
-**Returns:** <code>any</code>
-
---------------------
-
-
-### addPinned(...)
-
-```typescript
-addPinned(options: ShortcutItem) => any
-```
-
-**DEPRECATED - Use `pin`**
-
-| Param         | Type                                                  | Description                              |
-| ------------- | ----------------------------------------------------- | ---------------------------------------- |
-| **`options`** | <code><a href="#shortcutitem">ShortcutItem</a></code> | An option object for the pinned shortcut |
-
-**Returns:** <code>any</code>
 
 --------------------
 
@@ -242,9 +202,9 @@ addPinned(options: ShortcutItem) => any
 
 #### PluginListenerHandle
 
-| Prop         | Type                      |
-| ------------ | ------------------------- |
-| **`remove`** | <code>() =&gt; any</code> |
+| Prop         | Type                                      |
+| ------------ | ----------------------------------------- |
+| **`remove`** | <code>() =&gt; Promise&lt;void&gt;</code> |
 
 
 ### Type Aliases

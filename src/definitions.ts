@@ -72,17 +72,4 @@ export interface AndroidShortcutsPlugin {
    * Removes all listeners.
    */
   removeAllListeners(): Promise<void>;
-
-  /**
-   * **DEPRECATED - Use `setDynamic`**
-   * @param options An items array with the options of each shortcut
-   * @deprecated This function will be removed in future releases. Use {@link #setDynamic()} instead.
-   */
-  addDynamic(options: { items: ShortcutItem[] }): Promise<void>;
-  /**
-   * **DEPRECATED - Use `pin`**
-   * @param options An option object for the pinned shortcut
-   * @deprecated This function will be removed in future releases. Use {@link #pin()} instead.
-   */
-  addPinned(options: ShortcutItem): Promise<void>;
 }
