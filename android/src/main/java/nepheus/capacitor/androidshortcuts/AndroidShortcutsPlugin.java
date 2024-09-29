@@ -76,6 +76,7 @@ public class AndroidShortcutsPlugin extends Plugin {
             implementation.pin(this.getBridge(), id, shortLabel, longLabel, icon, data);
         } catch (Exception e) {
             call.reject(e.getMessage());
+            return;
         }
 
         call.resolve();
