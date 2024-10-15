@@ -67,7 +67,7 @@ export interface AndroidShortcutsPlugin {
   addListener(
     eventName: 'shortcut',
     listenerFunc: (response: { data: string }) => void,
-  ): Promise<PluginListenerHandle> & PluginListenerHandle;
+  ): Promise<PluginListenerHandle>;
   /**
    * Removes all listeners.
    */
