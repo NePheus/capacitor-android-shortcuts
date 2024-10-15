@@ -23,7 +23,7 @@ export class AndroidShortcutsWeb
   addListener(
     eventName: 'shortcut',
     listenerFunc: (response: { data: string }) => void,
-  ): Promise<PluginListenerHandle> & PluginListenerHandle {
+  ): Promise<PluginListenerHandle> {
     listenerFunc({ data: '' });
     return Promise.reject(
       `Listener for '${eventName}' not implemented.`,
