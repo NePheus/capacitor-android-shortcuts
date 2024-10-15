@@ -160,7 +160,7 @@ Add a pinned shortcut
 ### addListener('shortcut', ...)
 
 ```typescript
-addListener(eventName: 'shortcut', listenerFunc: (response: { data: string; }) => void) => Promise<PluginListenerHandle> & PluginListenerHandle
+addListener(eventName: 'shortcut', listenerFunc: (response: { data: string; }) => void) => Promise<PluginListenerHandle>
 ```
 
 Add a listener to a shortcut tap event
@@ -170,7 +170,7 @@ Add a listener to a shortcut tap event
 | **`eventName`**    | <code>'shortcut'</code>                               |
 | **`listenerFunc`** | <code>(response: { data: string; }) =&gt; void</code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
 
 --------------------
 
