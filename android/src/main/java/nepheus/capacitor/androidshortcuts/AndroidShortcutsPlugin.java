@@ -45,6 +45,7 @@ public class AndroidShortcutsPlugin extends Plugin {
             implementation.setDynamic(this.getBridge(), items);
         } catch (Exception e) {
             call.reject(e.getMessage());
+            return;
         }
 
         call.resolve();
@@ -76,6 +77,7 @@ public class AndroidShortcutsPlugin extends Plugin {
             implementation.pin(this.getBridge(), id, shortLabel, longLabel, icon, data);
         } catch (Exception e) {
             call.reject(e.getMessage());
+            return;
         }
 
         call.resolve();
